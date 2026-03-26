@@ -1017,13 +1017,13 @@
     }
 
     var TW = {
-      wordHold: 0,
+      wordHold: 1000,
       expandDur: 1.2,
       slideDur: 1.0,
       loftcoHold: 1500,
       loftcoFade: 0.6,
       postFadeGap: 700,
-      overlapMs: 600
+      nextWordDelay: 500
     };
 
     var animTimers = [];
@@ -1075,14 +1075,22 @@
         duration = duration || 1.0;
         var group = groups[groupIdx];
         var groupW = group.offsetWidth;
+        var groupH = group.offsetHeight;
+        group.style.position = 'absolute';
+        group.style.width = groupW + 'px';
         group.style.overflow = 'hidden';
+        bfcEl.style.minHeight = groupH + 'px';
         var curve = 'cubic-bezier(0.25, 1, 0.5, 1)';
-        initials[groupIdx].style.transition = 'transform ' + duration + 's ' + curve;
+        initials[groupIdx].style.transition = 'transform ' + duration + 's ' + curve + ', opacity ' + (duration * 0.8) + 's ease';
         initials[groupIdx].style.transform = 'translateX(-' + groupW + 'px)';
-        tailEl.style.transition = 'transform ' + duration + 's ' + curve;
+        initials[groupIdx].style.opacity = '0';
+        tailEl.style.transition = 'transform ' + duration + 's ' + curve + ', opacity ' + (duration * 0.8) + 's ease';
         tailEl.style.transform = 'translateX(-' + groupW + 'px)';
+        tailEl.style.opacity = '0';
         animTimeout(function() {
+          group.style.position = ''; group.style.width = '';
           group.style.overflow = ''; group.style.display = 'none';
+          bfcEl.style.minHeight = '';
           initials[groupIdx].style.transition = 'none'; initials[groupIdx].style.transform = '';
           initials[groupIdx].style.opacity = '0';
           tailEl.style.transition = 'none'; tailEl.style.transform = '';
@@ -1119,18 +1127,20 @@
         showAndExpand(0, tailB);
       }, t);
 
-      // Phase 3: Better out, Faster overlaps in
+      var nwd = TW.nextWordDelay;
+
+      // Phase 3: Better out, Faster in
       var p3 = t + TW.wordHold;
       animTimeout(function() { slideOutWord(0, tailB, slideDur); }, p3);
-      animTimeout(function() { showAndExpand(1, tailF); }, p3 + slideMs - TW.overlapMs);
+      animTimeout(function() { showAndExpand(1, tailF); }, p3 + nwd);
 
-      // Phase 4: Faster out, Cheaper overlaps in
-      var p4 = p3 + slideMs - TW.overlapMs + TW.wordHold;
+      // Phase 4: Faster out, Cheaper in
+      var p4 = p3 + nwd + TW.wordHold;
       animTimeout(function() { slideOutWord(1, tailF, slideDur); }, p4);
-      animTimeout(function() { showAndExpand(2, tailC); }, p4 + slideMs - TW.overlapMs);
+      animTimeout(function() { showAndExpand(2, tailC); }, p4 + nwd);
 
       // Phase 5: Cheaper out
-      var p5 = p4 + slideMs - TW.overlapMs + TW.wordHold;
+      var p5 = p4 + nwd + TW.wordHold;
       animTimeout(function() { slideOutWord(2, tailC, slideDur); }, p5);
 
       // Phase 6: LOFTCO crossfades back in
