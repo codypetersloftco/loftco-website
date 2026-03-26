@@ -1017,12 +1017,13 @@
     }
 
     var TW = {
-      wordHold: 1200,
-      expandDur: 1.2,
-      slideDur: 1.0,
+      wordHold: 200,
+      expandDur: 0.8,
+      slideDur: 0.6,
       loftcoHold: 1500,
       loftcoFade: 0.6,
-      postFadeGap: 700
+      postFadeGap: 700,
+      overlapMs: 300
     };
 
     var animTimers = [];
@@ -1118,18 +1119,18 @@
         showAndExpand(0, tailB);
       }, t);
 
-      // Phase 3: Better out, Faster in
+      // Phase 3: Better out, Faster overlaps in
       var p3 = t + TW.wordHold;
       animTimeout(function() { slideOutWord(0, tailB, slideDur); }, p3);
-      animTimeout(function() { showAndExpand(1, tailF); }, p3 + slideMs);
+      animTimeout(function() { showAndExpand(1, tailF); }, p3 + slideMs - TW.overlapMs);
 
-      // Phase 4: Faster out, Cheaper in
-      var p4 = p3 + slideMs + TW.wordHold;
+      // Phase 4: Faster out, Cheaper overlaps in
+      var p4 = p3 + slideMs - TW.overlapMs + TW.wordHold;
       animTimeout(function() { slideOutWord(1, tailF, slideDur); }, p4);
-      animTimeout(function() { showAndExpand(2, tailC); }, p4 + slideMs);
+      animTimeout(function() { showAndExpand(2, tailC); }, p4 + slideMs - TW.overlapMs);
 
       // Phase 5: Cheaper out
-      var p5 = p4 + slideMs + TW.wordHold;
+      var p5 = p4 + slideMs - TW.overlapMs + TW.wordHold;
       animTimeout(function() { slideOutWord(2, tailC, slideDur); }, p5);
 
       // Phase 6: LOFTCO crossfades back in
