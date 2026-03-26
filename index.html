@@ -1150,8 +1150,8 @@
     }
 
     // Run on page load
-    window.addEventListener('load', function() {
-      setTimeout(function() { measureAndSet(); runLoftco(); }, 300);
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() { measureAndSet(); runLoftco(); }, 100);
     });
 
     window.addEventListener('resize', measureAndSet);
