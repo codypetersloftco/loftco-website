@@ -902,11 +902,20 @@
         </div>
       </div>
 
-      <form class="contact-form reveal" onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch.');">
+      <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/cs@loftco.com" method="POST">
+        <input type="hidden" name="_subject" value="Loftco Website — Customer Service">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://codypetersloftco.github.io/loftco-website/#contact">
+
         <label for="inquiry-type">INQUIRY TYPE</label>
-        <select id="inquiry-type" name="inquiry_type">
-          <option value="bid">Bid Request</option>
+        <select id="inquiry-type" name="inquiry_type" onchange="
+          var routes = {bid:'bids@loftco.com', service:'cs@loftco.com', employment:'jobs@loftco.com'};
+          var subjects = {bid:'Bid Request', service:'Customer Service', employment:'Employment Inquiry'};
+          this.form.action = 'https://formsubmit.co/' + routes[this.value];
+          this.form.querySelector('[name=_subject]').value = 'Loftco Website — ' + subjects[this.value];
+        ">
           <option value="service">Customer Service</option>
+          <option value="bid">Bid Request</option>
           <option value="employment">Employment</option>
         </select>
 
