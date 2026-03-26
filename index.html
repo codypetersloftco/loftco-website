@@ -29,6 +29,7 @@
     "foundingDate": "1988-03-06"
   }
   </script>
+  <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&display=swap" rel="stylesheet">
@@ -498,37 +499,6 @@
       aspect-ratio: 8/3;
     }
 
-    /* ── TIMELAPSE SHOWCASE ── */
-    .timelapse {
-      background: var(--warm-black);
-      color: #fff;
-    }
-
-    .timelapse .section-label { color: rgba(255,255,255,0.6); }
-    .timelapse .section-heading { color: #fff; }
-
-    .timelapse-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .timelapse-video-wrap {
-      position: relative;
-      margin-top: clamp(1.5rem, 3vw, 2rem);
-    }
-
-    .timelapse-video-wrap video {
-      width: 100%;
-      display: block;
-    }
-
-    .timelapse-caption {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.5);
-      font-style: italic;
-    }
-
     /* ── CONTACT ── */
     .contact {
       background: var(--sand);
@@ -727,7 +697,6 @@
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#timelapse">Timelapse</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -882,21 +851,6 @@
       <img src="assets/images/framing-16.jpg" alt="Sprawling ranch with moon in blue sky" loading="lazy">
       <img src="assets/images/framing-12.jpg" alt="Standard single-family full frame" loading="lazy">
       <img src="assets/images/framing-5.jpg" alt="Wall framing detail against blue sky" loading="lazy">
-    </div>
-  </section>
-
-  <!-- TIMELAPSE -->
-  <section class="timelapse" id="timelapse">
-    <div class="timelapse-content reveal">
-      <div class="section-label">WATCH US BUILD</div>
-      <h2 class="section-heading">Timelapse</h2>
-      <div class="timelapse-video-wrap">
-        <video controls playsinline preload="metadata" style="width:100%">
-          <source src="assets/videos/maravilla-timelapse.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <p class="timelapse-caption">Multi-story commercial framing from foundation to finish.</p>
-      </div>
     </div>
   </section>
 
