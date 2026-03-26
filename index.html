@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loftco, Inc. | Arizona's Premier Turn-Key Framer</title>
+  <meta name="description" content="Loftco designs, manufactures, and installs wall panels, trusses, stairs, arches, and radius plates. Arizona's premier full-service turn-key framer since 1988.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+    :root {
+      --charcoal: #1a1714;
+      --warm-black: #2c2620;
+      --ochre: #c8842a;
+      --ochre-dark: #a66b1c;
+      --rust: #b5542a;
+      --sand: #f5f0e8;
+      --sand-light: #faf7f2;
+      --warm-gray: #8a8078;
+      --warm-gray-light: #c4bbb0;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Source Serif 4', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      background: var(--sand-light);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: clamp(1rem, 2vw, 1.5rem) clamp(1.5rem, 4vw, 3rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(26, 23, 20, 0.95);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo img {
+      height: clamp(28px, 4vw, 40px);
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+      letter-spacing: 0.12em;
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      margin: 5px 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26, 23, 20, 0.2) 0%,
+        rgba(26, 23, 20, 0.1) 40%,
+        rgba(26, 23, 20, 0.6) 80%,
+        rgba(26, 23, 20, 0.85) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      letter-spacing: 0.25em;
+      color: var(--ochre);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      color: rgba(255,255,255,0.75);
+      margin-top: 1.25rem;
+      max-width: 500px;
+      font-weight: 350;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.9rem 2.5rem;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: #fff;
+      background: var(--ochre);
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero-cta:hover {
+      background: var(--ochre-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: clamp(0.8rem, 1vw, 0.9rem);
+      letter-spacing: 0.3em;
+      color: var(--ochre);
+      margin-bottom: 1rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+      margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--sand);
+    }
+
+    .about-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      color: var(--warm-black);
+      margin-bottom: 1.25rem;
+      font-weight: 380;
+    }
+
+    .about-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: clamp(2rem, 4vw, 3rem);
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--warm-gray-light);
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--ochre);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+      margin-top: 0.25rem;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      background: var(--charcoal);
+      color: #fff;
+    }
+
+    .services .section-heading { color: #fff; }
+
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .service-card {
+      padding: clamp(1.5rem, 2.5vw, 2.5rem);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--ochre);
+      transform: translateY(-4px);
+    }
+
+    .service-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      font-size: clamp(0.9rem, 1.1vw, 1rem);
+      color: rgba(255,255,255,0.6);
+      font-weight: 350;
+      line-height: 1.7;
+    }
+
+    .services-list {
+      max-width: 1200px;
+      margin: clamp(2rem, 4vw, 3rem) auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .services-list span {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      background: var(--sand-light);
+    }
+
+    .gallery-intro {
+      max-width: 1200px;
+      margin: 0 auto clamp(2rem, 4vw, 3rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+
+    .gallery-intro p {
+      max-width: 450px;
+      font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+      color: var(--warm-gray);
+      font-weight: 380;
+    }
+
+    .gallery-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.5rem, 1vw, 0.75rem);
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+      cursor: pointer;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
+
+    .gallery-grid .gallery-wide {
+      grid-column: span 2;
+      aspect-ratio: 8/3;
+    }
+
+    /* ── TIMELAPSE SHOWCASE ── */
+    .timelapse {
+      background: var(--warm-black);
+      color: #fff;
+    }
+
+    .timelapse .section-heading { color: #fff; }
+
+    .timelapse-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .timelapse-video-wrap {
+      position: relative;
+      margin-top: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .timelapse-video-wrap video {
+      width: 100%;
+      display: block;
+    }
+
+    .timelapse-caption {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--sand);
+    }
+
+    .contact-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      color: var(--charcoal);
+    }
+
+    .contact-info p, .contact-info a {
+      font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+      color: var(--warm-gray);
+      text-decoration: none;
+      font-weight: 380;
+    }
+
+    .contact-info a:hover { color: var(--ochre); }
+
+    .contact-block { margin-bottom: 2rem; }
+
+    .contact-form label {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      color: var(--warm-gray);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      border: 1px solid var(--warm-gray-light);
+      background: var(--sand-light);
+      color: var(--charcoal);
+      margin-bottom: 1.25rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+      outline: none;
+      border-color: var(--ochre);
+    }
+
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+
+    .contact-form button {
+      padding: 0.9rem 2.5rem;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      letter-spacing: 0.15em;
+      color: #fff;
+      background: var(--ochre);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: var(--ochre-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.4);
+      padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover { color: var(--ochre); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
+    .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.4s; }
+    .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(26, 23, 20, 0.97);
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+      .nav-toggle { display: block; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .about-image { order: -1; }
+
+      .services-grid { grid-template-columns: 1fr; }
+
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid .gallery-wide { grid-column: span 2; }
+
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .stats-row { flex-wrap: wrap; }
+
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid .gallery-wide { grid-column: span 1; aspect-ratio: 4/3; }
+
+      .hero h1 { font-size: 2.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal-stagger > * { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="assets/images/loftco-logo.png" alt="Loftco, Inc.">
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#timelapse">Timelapse</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="assets/images/hero-poster.jpg">
+      <source src="assets/videos/itom-ae-timelapse.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <div class="hero-tag">ARIZONA'S PREMIER TURN-KEY FRAMER</div>
+      <h1>Better, Faster,<br>Cheaper.</h1>
+      <p class="hero-sub">We design, manufacture, and install. Full-service structural framing since 1988.</p>
+      <a href="#contact" class="hero-cta">Request a Bid</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-label">ABOUT LOFTCO</div>
+        <h2 class="section-heading">Building Arizona<br>Since 1988</h2>
+        <p>An Arizona-based premier full-service turn-key framer. Our outstanding quality and performance has earned us an exceptional reputation in the marketplace.</p>
+        <p>From single-family homes to multi-story commercial structures, we handle every phase of structural framing &mdash; design, manufacturing, and installation &mdash; under one roof.</p>
+        <div class="stats-row">
+          <div>
+            <div class="stat-number">37+</div>
+            <div class="stat-label">Years in Business</div>
+          </div>
+          <div>
+            <div class="stat-number">AZ</div>
+            <div class="stat-label">Based &amp; Built</div>
+          </div>
+          <div>
+            <div class="stat-number">3</div>
+            <div class="stat-label">ROC Licensed</div>
+          </div>
+        </div>
+      </div>
+      <img src="assets/images/framing-10.jpg" alt="Loftco truck at a framing jobsite at golden hour" class="about-image reveal" loading="lazy">
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-label">WHAT WE DO</div>
+    <h2 class="section-heading">Full-Service<br>Turn-Key Framing</h2>
+    <div class="services-grid reveal-stagger">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3>Design</h3>
+        <p>Engineering and layout for every structural component. Our design team works from blueprints to build-ready plans, optimized for material efficiency and structural integrity.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3>Manufacture</h3>
+        <p>Wall panels, trusses, and specialty components built in our facility. Precision-cut and assembled before they ever reach the jobsite &mdash; faster installs, less waste.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3>Install</h3>
+        <p>Experienced crews handle everything from foundation plates to ridge beams. Single-family, multi-family, and commercial &mdash; we frame it all.</p>
+      </div>
+    </div>
+    <div class="services-list reveal-stagger">
+      <span>Wall Panels</span>
+      <span>Trusses</span>
+      <span>Stairs</span>
+      <span>Arches</span>
+      <span>Radius Plates</span>
+      <span>Single-Family</span>
+      <span>Multi-Family</span>
+      <span>Commercial</span>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-intro">
+      <div>
+        <div class="section-label">OUR WORK</div>
+        <h2 class="section-heading">Gallery</h2>
+      </div>
+      <p>From production housing to large-scale commercial &mdash; a sample of what we build across Arizona.</p>
+    </div>
+    <div class="gallery-grid reveal-stagger">
+      <img src="assets/images/framing-3.jpg" alt="Rafters against deep blue sky" class="gallery-wide" loading="lazy">
+      <img src="assets/images/framing-1.jpg" alt="Luxury multi-story residential framing" loading="lazy">
+      <img src="assets/images/framing-7.jpg" alt="Multi-unit townhomes wide shot" loading="lazy">
+      <img src="assets/images/framing-4.jpg" alt="3-story commercial with scaffolding" loading="lazy">
+      <img src="assets/images/framing-6.jpg" alt="3-story framing with active crew" loading="lazy">
+      <img src="assets/images/framing-9.jpg" alt="Townhomes with arched framing details" loading="lazy">
+      <img src="assets/images/framing-11.jpg" alt="2-story residential with complex roofline" loading="lazy">
+      <img src="assets/images/framing-13.jpg" alt="Large single-family front view" class="gallery-wide" loading="lazy">
+      <img src="assets/images/framing-16.jpg" alt="Sprawling ranch with moon in blue sky" loading="lazy">
+      <img src="assets/images/framing-12.jpg" alt="Standard single-family full frame" loading="lazy">
+      <img src="assets/images/framing-5.jpg" alt="Wall framing detail against blue sky" loading="lazy">
+    </div>
+  </section>
+
+  <!-- TIMELAPSE -->
+  <section class="timelapse" id="timelapse">
+    <div class="timelapse-content reveal">
+      <div class="section-label">WATCH US BUILD</div>
+      <h2 class="section-heading">Timelapse</h2>
+      <div class="timelapse-video-wrap">
+        <video controls playsinline preload="metadata" style="width:100%">
+          <source src="assets/videos/maravilla-timelapse.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="timelapse-caption">Maravilla Building C &mdash; Multi-story commercial framing from foundation to finish.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="section-label">GET IN TOUCH</div>
+        <h2 class="section-heading">Contact Us</h2>
+
+        <div class="contact-block">
+          <h3>ADDRESS</h3>
+          <p>1832 E Deer Valley Rd<br>Phoenix, AZ 85024</p>
+        </div>
+
+        <div class="contact-block">
+          <h3>PHONE</h3>
+          <p><a href="tel:6024454000">(602) 445-4000</a></p>
+        </div>
+
+        <div class="contact-block">
+          <h3>HOURS</h3>
+          <p>Monday &ndash; Friday<br>7:00 AM &ndash; 3:00 PM (MST)</p>
+        </div>
+
+        <div class="contact-block">
+          <h3>LICENSES</h3>
+          <p>ROC 101143 &nbsp;|&nbsp; ROC 343473</p>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch.');">
+        <label for="inquiry-type">INQUIRY TYPE</label>
+        <select id="inquiry-type" name="inquiry_type">
+          <option value="bid">Bid Request</option>
+          <option value="service">Customer Service</option>
+          <option value="employment">Employment</option>
+        </select>
+
+        <label for="name">NAME</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">EMAIL</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">MESSAGE</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Loftco, Inc. &nbsp;|&nbsp; ROC 101143 &nbsp;|&nbsp; ROC 343473</p>
+    <ul class="footer-links">
+      <li><a href="tel:6024454000">(602) 445-4000</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
