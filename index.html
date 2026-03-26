@@ -914,7 +914,7 @@
 
         <div class="contact-block">
           <h3>PHONE</h3>
-          <p><a href="tel:6024454000">(602) 445-4000</a></p>
+          <p><a class="obf-phone" href="#">loading...</a></p>
         </div>
 
         <div class="contact-block">
@@ -967,7 +967,7 @@
   <footer>
     <p>&copy; 2026 Loftco, Inc. &nbsp;|&nbsp; ROC 101143 &nbsp;|&nbsp; ROC 343473</p>
     <ul class="footer-links">
-      <li><a href="tel:6024454000">(602) 445-4000</a></li>
+      <li><a class="obf-phone" href="#">loading...</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="tax.html">Employee Tax Notice</a></li>
     </ul>
@@ -1209,6 +1209,12 @@
       var age = now.getFullYear() - founded.getFullYear();
       if (now < new Date(now.getFullYear(), 2, 6)) age--;
       document.getElementById('loftco-age').textContent = age + '+';
+      var p = ['6','0','2','4','4','5','4','0','0','0'];
+      var pn = '(' + p.slice(0,3).join('') + ') ' + p.slice(3,6).join('') + '-' + p.slice(6).join('');
+      document.querySelectorAll('.obf-phone').forEach(function(a) {
+        a.href = 'tel:' + p.join('');
+        a.textContent = pn;
+      });
     })();
   </script>
 

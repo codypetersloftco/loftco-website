@@ -144,7 +144,10 @@
 
     <p class="contact-method"><strong>Mail:</strong> 1832 E Deer Valley Rd, Phoenix, AZ 85024</p>
 
-    <p class="contact-method"><strong>Phone:</strong> <a href="tel:6024454000">(602) 445-4000</a></p>
+    <p class="contact-method"><strong>Phone:</strong> <a id="tax-phone" href="#">loading...</a></p>
+    <script>
+      (function(){var p=['6','0','2','4','4','5','4','0','0','0'],pn='('+p.slice(0,3).join('')+') '+p.slice(3,6).join('')+'-'+p.slice(6).join(''),a=document.getElementById('tax-phone');a.href='tel:'+p.join('');a.textContent=pn;})();
+    </script>
 
     <p>Forms will be provided within 30 days of your request.</p>
 
